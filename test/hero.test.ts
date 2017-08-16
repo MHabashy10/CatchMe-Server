@@ -59,4 +59,10 @@ describe('GET api/v1/heroes/:id', () => {
             });
     });
 
+
+    it('should return Spider-Man', async () => {
+        const res = await chai.request(app).get('/api/v1/heroes/2')
+        expect(res.body.hero.name).to.equal('Spider-Man');
+    });
+
 });
