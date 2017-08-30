@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node dist/www/index.js",
+    "compile": "gulp compile",
     "test": "mocha --reporter spec --compilers ts:ts-node/register"
   },
   "author": "Mohamed Habashy (mohamed.habshey10@gmail.com)",
