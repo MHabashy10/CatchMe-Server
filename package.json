@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "prestart": "npm run compile",
     "start": "node dist/www/index.js",
     "compile": "gulp compile",
     "test": "mocha --reporter spec --compilers ts:ts-node/register"
