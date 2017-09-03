@@ -4,7 +4,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 
 import HeroRouter from './routes/HeroRouter';
-import AccountRouter from './routes/AccountRouter'
+import AccountRouter from './routes/accountRouter'
 
 // Creates and configures an ExpressJS web server.
 class App {
