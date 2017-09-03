@@ -29,7 +29,6 @@ export class AccountRouter {
       return
 
     };
-    console.log("email", req.body.email);
     res.send({ "Heroes": "login Success" });
   }
 
