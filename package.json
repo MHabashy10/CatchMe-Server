@@ -6,6 +6,7 @@
     "prestart": "npm run compile",
     "start": "node dist/www/index.js",
     "compile": "gulp compile",
+    "dev": "concurrently \"gulp  default\" \"nodemon \"",
     "test": "mocha --reporter spec --compilers ts:ts-node/register"
   },
   "author": "Mohamed Habashy (mohamed.habshey10@gmail.com)",
@@ -27,9 +28,11 @@
     "@types/node": "^6.0.86",
     "chai": "^4.1.1",
     "chai-http": "^3.0.0",
+    "concurrently": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.1",
     "mocha": "^3.5.0",
+    "nodemon": "^1.11.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.4.2"
   }
