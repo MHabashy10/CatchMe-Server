@@ -26,13 +26,13 @@
 		"@types/express": "^4.0.39",
 		"@types/mocha": "^2.2.44",
 		"@types/morgan": "^1.7.35",
-		"@types/node": "^6.0.88",
+		"@types/node": "^6.0.90",
 		"chai": "^4.1.2",
 		"chai-http": "^3.0.0",
 		"gulp": "^3.9.1",
-		"gulp-typescript": "^3.2.2",
+		"gulp-typescript": "^3.2.3",
 		"mocha": "^3.5.3",
-		"nodemon": "^1.11.1",
+		"nodemon": "^1.12.1",
 		"ts-node": "^3.3.0",
 		"typescript": "^2.6.1"
 	}
