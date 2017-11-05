@@ -29,7 +29,17 @@ export class AccountRouter {
       return
 
     };
-    res.send({ "Heroes": "login Success" });
+    let email = req.body.email;
+    let password = req.body.password;
+
+    res.send({
+      status: true,
+      avatar: 'https://www.w3schools.com/howto/img_avatar.png',
+      firstName: "Mohamed",
+      lastName: "Habashy",
+      email: "mohamed.habshey10@gmail.com",
+      phone: "+201125184775"
+    });
   }
 
 
@@ -45,6 +55,28 @@ export class AccountRouter {
           message: 'Success',
           status: res.status,
           hero
+        });
+    }
+    else {
+      res.status(404)
+        .send({
+          message: 'No hero found with the given id.',
+          status: res.status
+        });
+    }
+  }
+
+  public getProfile(req: Request, res: Response, next: NextFunction) {
+    let query = parseInt(req.params.userId);
+    let hero = true //Heroes.find(hero => hero.id === query);
+    if (hero) {
+      res.status(200)
+        .send({
+          avatar: 'Success',
+          firstName: "Mohamed",
+          lastName: "Habashy",
+          email: "mohamed.habshey10@gmail.com",
+          phone: "+201125184775"
         });
     }
     else {
