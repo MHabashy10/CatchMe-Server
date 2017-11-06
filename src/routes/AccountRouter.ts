@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
+import { User } from '../models/userModel'
 
 export class AccountRouter {
   router: Router
@@ -32,14 +33,22 @@ export class AccountRouter {
     let email = req.body.email;
     let password = req.body.password;
 
-    res.send({
-      status: true,
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png',
-      firstName: "Mohamed",
-      lastName: "Habashy",
-      email: "mohamed.habshey10@gmail.com",
-      phone: "+201125184775"
-    });
+    User.find({ email, password })
+
+      .then(function (aUser: any) {
+
+
+        if (!aUser.length) {
+          return res.send({ status: false })
+        }
+
+        aUser[0].status = "true";
+
+        res.send(aUser[0]);
+      }).catch(function (error: any) {
+        res.sendStatus(400);
+      })
+
   }
 
 
@@ -48,7 +57,16 @@ export class AccountRouter {
  */
   public signUp(req: Request, res: Response, next: NextFunction) {
     let query = parseInt(req.params.id);
+    let email = req.body.email;
+    let password = req.body.password;
     let hero = true //Heroes.find(hero => hero.id === query);
+
+    var newUser = new User({ email: email, password: password });
+
+    newUser.save(function (err, aUser) {
+      if (err) return console.error(err);
+      console.log("user created");
+    });
     if (hero) {
       res.status(200)
         .send({
