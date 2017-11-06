@@ -5,12 +5,13 @@
             "name": "Lanuch Program",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
             "args": [
                 "${workspaceRoot}\\src\\www\\index.ts"
             ],
+            "runtimeArgs": ["-r", "ts-node/register"],
             "cwd": "${workspaceRoot}",
-            "protocol": "inspector"
+            "protocol": "inspector",
+            "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "name": "Current TS Tests File",
