@@ -33,18 +33,18 @@ export class AccountRouter {
     let email = req.body.email;
     let password = req.body.password;
 
-    User.find({ email, password })
+    User.findOne({ email, password }, { password: 0 })
 
       .then(function (aUser: any) {
 
 
-        if (!aUser.length) {
+        if (!aUser) {
           return res.send({ status: false })
         }
 
-        aUser[0].status = "true";
+        aUser.status = "true";
 
-        res.send(aUser[0]);
+        res.send(aUser);
       }).catch(function (error: any) {
         res.sendStatus(400);
       })
