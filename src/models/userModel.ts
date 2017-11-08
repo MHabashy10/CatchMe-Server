@@ -3,7 +3,7 @@ import { Document, Schema, Model, model } from 'mongoose';
 
 
 
-export var userSchema: Schema = Schema({
+export var userSchema: Schema = new Schema({
     firstName: String,
     lastName: String,
     email: String,
@@ -11,4 +11,4 @@ export var userSchema: Schema = Schema({
     phone: Number,
     avatar: String
 });
-export const User: Model = model('User', userSchema);
+export const User: Model<any> = model('User', userSchema);
