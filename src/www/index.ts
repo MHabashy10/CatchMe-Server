@@ -1,6 +1,9 @@
 import * as http from 'http';
 import * as debug from 'debug';
 
+import * as dotenv from 'dotenv';
+dotenv.config()
+
 import App from '../app';
 
 debug('ts-express:server');
@@ -15,9 +18,9 @@ server.on('listening', onListening);
 
 import * as mongoose from 'mongoose';
 // Set mongoose.Promise to any Promise implementation
-(<any>mongoose).Promise = Promise;  
+(<any>mongoose).Promise = Promise;
 
-mongoose.connect('mongodb://catchme:catchme_mongo@ds019839.mlab.com:19839/realtime-node', { useMongoClient: true });
+mongoose.connect(process.env.mongodbUrl, { useMongoClient: true });
 
 
 var db = mongoose.connection;
