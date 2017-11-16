@@ -60,6 +60,9 @@ export class AccountRouter {
     let email = req.body.email;
     let password = req.body.password;
     let hero = true //Heroes.find(hero => hero.id === query);
+    if (!(email || password)) {
+      return res.send({ status: false })
+    }
 
     var newUser = new User({ email: email, password: password });
 
