@@ -66,25 +66,20 @@ export class AccountRouter {
 
     var newUser = new User({ email: email, password: password });
 
-    newUser.save(function (err, aUser) {
-      if (err) return console.error(err);
+    newUser.save().then(function (aUser) {
+
       console.log("user created");
+      res.status(200).send({ message: 'Success' });
+
+    }).catch(function (err: any) {
+
+       console.error(err);
+      res.status(500)
+        .send({
+          message: 'error creating this user.'
+        });
     });
-    if (hero) {
-      res.status(200)
-        .send({
-          message: 'Success',
-          status: res.status,
-          hero
-        });
-    }
-    else {
-      res.status(404)
-        .send({
-          message: 'No hero found with the given id.',
-          status: res.status
-        });
-    }
+
   }
 
   public getProfile(req: Request, res: Response, next: NextFunction) {
@@ -103,7 +98,7 @@ export class AccountRouter {
     else {
       res.status(404)
         .send({
-          message: 'No hero found with the given id.',
+          message: 'Not found with the given id.',
           status: res.status
         });
     }
