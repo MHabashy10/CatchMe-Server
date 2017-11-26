@@ -3,8 +3,26 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import HeroRouter from './routes/HeroRouter';
 import AccountRouter from './routes/accountRouter'
+
+import * as mongoose from 'mongoose';
+// Set mongoose.Promise to any Promise implementation
+(<any>mongoose).Promise = Promise;
+
+mongoose.connect(process.env.mongodbUrl, { useMongoClient: true });
+
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // we're connected!
+  console.log("mongoDb connected successfully");
+});
+
 
 // Creates and configures an ExpressJS web server.
 class App {

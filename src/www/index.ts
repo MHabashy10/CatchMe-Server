@@ -1,8 +1,7 @@
 import * as http from 'http';
 import * as debug from 'debug';
 
-import * as dotenv from 'dotenv';
-dotenv.config()
+
 
 import App from '../app';
 
@@ -16,19 +15,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-import * as mongoose from 'mongoose';
-// Set mongoose.Promise to any Promise implementation
-(<any>mongoose).Promise = Promise;
 
-mongoose.connect(process.env.mongodbUrl, { useMongoClient: true });
-
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  // we're connected!
-  console.log("mongoDb connected successfully");
-});
 function normalizePort(val: number | string): number | string | boolean {
   let port: number = (typeof val === 'string') ? parseInt(val, 10) : val;
   if (isNaN(port)) return val;
