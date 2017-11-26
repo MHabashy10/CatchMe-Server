@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 
 import { User } from '../models/userModel'
 
-export class AccountRouter {
+class AccountRouter {
   router: Router
 
   /**
