@@ -6,7 +6,7 @@ import * as bodyParser from 'body-parser';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import HeroRouter from './routes/HeroRouter';
+import HeroRouter from './routes/heroRouter';
 import AccountRouter from './routes/accountRouter'
 
 import * as mongoose from 'mongoose';

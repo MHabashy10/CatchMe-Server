@@ -31,7 +31,7 @@ describe('POST api/v1/accounts/login', () => {
 describe('POST api/v1/accounts/signUp', () => {
 
 
-    it('should return Spider-Man', async () => {
+    it('creation should return Success', async () => {
         const res = await chai.request(app).post('/api/v1/accounts/signUp')
             .send({ email: "wa@as.c", password: "as" })
             expect(res.status).to.equal(200);
