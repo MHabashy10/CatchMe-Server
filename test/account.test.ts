@@ -10,26 +10,33 @@ const expect = chai.expect;
 describe('POST api/v1/accounts/login', () => {
 
     it('responds with JSON array', () => {
-        return chai.request(app).post('/api/v1/accounts/login',).send({email:"asas",password:"55"})
+        return chai.request(app).post('/api/v1/accounts/login', )
+        .send({ email: "as@as.c", password: "as" })
             .then(res => {
                 expect(res.status).to.equal(200);
                 expect(res).to.be.json;
                 expect(res.body).to.be.an('object');
-                expect(res.body).to.have.haveOwnProperty("Heroes");
+                expect(res.body).to.have.haveOwnProperty("email");
+                expect(res.body).to.have.haveOwnProperty("avatar");
+                expect(res.body).to.not.have.haveOwnProperty("password");
+                expect(res.body).to.have.haveOwnProperty("_id");
             });
     });
 
-    
+
 
 });
 
 
-describe('POST api/v1/accounts/signup', () => {
+describe('POST api/v1/accounts/signUp', () => {
 
 
     it('should return Spider-Man', async () => {
-        const res = await chai.request(app).get('/api/v1/heroes/2')
-        expect(res.body.hero.name).to.equal('Spider-Man');
+        const res = await chai.request(app).post('/api/v1/accounts/signUp')
+            .send({ email: "wa@as.c", password: "as" })
+            expect(res.status).to.equal(200);
+            expect(res).to.be.json;
+        expect(res.body.message).to.equal('Success');
     });
 
 });
