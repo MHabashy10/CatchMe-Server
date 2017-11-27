@@ -7,7 +7,30 @@
 		"start": "node dist/www/index.js",
 		"compile": "gulp compile",
 		"dev": "concurrently \"gulp  default\" \"nodemon \"",
-		"test": "mocha --reporter spec --compilers ts:ts-node/register"
+		"test": "mocha --reporter spec --compilers ts:ts-node/register",
+		"coverage": "nyc npm test"
+	},
+	"nyc": {
+		"include": [
+			"src/**/*.ts",
+			"src/**/*.tsx"
+		],
+		"exclude": [
+		  "typings"
+		],
+		"extension": [
+			".ts",
+			".tsx"
+		],
+		"require": [
+			"ts-node/register"
+		],
+		"reporter": [
+			"text-summary",
+			"html"
+		],
+		"sourceMap": true,
+		"instrument": true
 	},
 	"author": "Mohamed Habashy (mohamed.habshey10@gmail.com)",
 	"license": "ISC",
@@ -37,6 +60,7 @@
 		"gulp-typescript": "^3.2.3",
 		"mocha": "^3.5.3",
 		"nodemon": "^1.12.1",
+		"nyc": "^11.3.0",
 		"ts-node": "^3.3.0",
 		"typescript": "^2.6.1"
 	}

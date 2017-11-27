@@ -5,3 +5,7 @@ package-lock\.json
 
 dist/
 .env
+
+\.nyc_output/
+
+coverage/
