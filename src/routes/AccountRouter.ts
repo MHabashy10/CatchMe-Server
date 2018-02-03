@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 
 import { User } from '../models/userModel'
 
-export class AccountRouter {
+class AccountRouter {
   router: Router
 
   /**
@@ -12,10 +12,61 @@ export class AccountRouter {
     this.router = Router();
     this.init();
   }
+/**
+ * @swagger
+ * definitions:
+ *   NewUser:
+ *     type: object
+ *     required:
+ *       - username
+ *       - password
+ *     properties:
+ *       username:
+ *         type: string
+ *       password:
+ *         type: string
+ *         format: password
+ *   User:
+ *     allOf:
+ *       - $ref: '#/definitions/NewUser'
+ *       - required:
+ *         - id
+ *       - properties:
+ *         id:
+ *           type: integer
+ *           format: int64
+ */
+  /**
+ * @swagger
+ * tags:
+ *   name: Account
+ *   description: Account management and login
+ */
 
   /**
-   * Login.
-   */
+  * @swagger
+  * /accounts/login:
+  *   post:
+  *     description: Login to the application
+  *     tags:
+  *      - Account
+  *     produces:
+  *       - application/json
+  *     parameters:
+  *       - name: email
+  *         description: email to use for login.
+  *         in: formData
+  *         required: true
+  *         type: string
+  *       - name: password
+  *         description: User's password.
+  *         in: formData
+  *         required: true
+  *         type: string
+  *     responses:
+  *       200:
+  *         description: login
+  */
   public login(req: Request, res: Response, next: NextFunction) {
     if (req.method === 'OPTIONS') {
       var headers = {};
@@ -55,6 +106,15 @@ export class AccountRouter {
   /**
  * GET one hero by id
  */
+  /**
+     * @swagger
+     * /:
+     *   get:
+     *     description: Returns the homepage
+     *     responses:
+     *       200:
+     *         description: hello world
+     */
   public signUp(req: Request, res: Response, next: NextFunction) {
     let query = parseInt(req.params.id);
     let email = req.body.email;
@@ -66,25 +126,20 @@ export class AccountRouter {
 
     var newUser = new User({ email: email, password: password });
 
-    newUser.save(function (err, aUser) {
-      if (err) return console.error(err);
+    newUser.save().then(function (aUser) {
+
       console.log("user created");
+      res.status(200).send({ message: 'Success' });
+
+    }).catch(function (err: any) {
+
+      console.error(err);
+      res.status(500)
+        .send({
+          message: 'error creating this user.'
+        });
     });
-    if (hero) {
-      res.status(200)
-        .send({
-          message: 'Success',
-          status: res.status,
-          hero
-        });
-    }
-    else {
-      res.status(404)
-        .send({
-          message: 'No hero found with the given id.',
-          status: res.status
-        });
-    }
+
   }
 
   public getProfile(req: Request, res: Response, next: NextFunction) {
@@ -103,7 +158,7 @@ export class AccountRouter {
     else {
       res.status(404)
         .send({
-          message: 'No hero found with the given id.',
+          message: 'Not found with the given id.',
           status: res.status
         });
     }

@@ -7,7 +7,30 @@
 		"start": "node dist/www/index.js",
 		"compile": "gulp compile",
 		"dev": "concurrently \"gulp  default\" \"nodemon \"",
-		"test": "mocha --reporter spec --compilers ts:ts-node/register"
+		"test": "mocha --reporter spec --compilers ts:ts-node/register",
+		"coverage": "nyc npm test"
+	},
+	"nyc": {
+		"include": [
+			"src/**/*.ts",
+			"src/**/*.tsx"
+		],
+		"exclude": [
+			"typings"
+		],
+		"extension": [
+			".ts",
+			".tsx"
+		],
+		"require": [
+			"ts-node/register"
+		],
+		"reporter": [
+			"text-summary",
+			"html"
+		],
+		"sourceMap": true,
+		"instrument": true
 	},
 	"author": "Mohamed Habashy (mohamed.habshey10@gmail.com)",
 	"license": "ISC",
@@ -18,7 +41,10 @@
 		"dotenv": "^4.0.0",
 		"express": "^4.16.2",
 		"mongoose": "^4.13.5",
-		"morgan": "^1.9.0"
+		"morgan": "^1.9.0",
+		"swagger-jsdoc": "^1.9.7",
+		"swagger-ui-express": "^2.0.15"
+
 	},
 	"devDependencies": {
 		"@types/body-parser": "^1.16.8",
@@ -31,12 +57,14 @@
 		"@types/mongoose": "^4.7.28",
 		"@types/morgan": "^1.7.35",
 		"@types/node": "^6.0.92",
+		"@types/swagger-jsdoc": "0.0.2",
 		"chai": "^4.1.2",
 		"chai-http": "^3.0.0",
 		"gulp": "^3.9.1",
 		"gulp-typescript": "^3.2.3",
 		"mocha": "^3.5.3",
 		"nodemon": "^1.12.1",
+		"nyc": "^11.3.0",
 		"ts-node": "^3.3.0",
 		"typescript": "^2.6.1"
 	}
