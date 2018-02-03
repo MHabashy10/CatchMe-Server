@@ -12,10 +12,61 @@ class AccountRouter {
     this.router = Router();
     this.init();
   }
+/**
+ * @swagger
+ * definitions:
+ *   NewUser:
+ *     type: object
+ *     required:
+ *       - username
+ *       - password
+ *     properties:
+ *       username:
+ *         type: string
+ *       password:
+ *         type: string
+ *         format: password
+ *   User:
+ *     allOf:
+ *       - $ref: '#/definitions/NewUser'
+ *       - required:
+ *         - id
+ *       - properties:
+ *         id:
+ *           type: integer
+ *           format: int64
+ */
+  /**
+ * @swagger
+ * tags:
+ *   name: Account
+ *   description: Account management and login
+ */
 
   /**
-   * Login.
-   */
+  * @swagger
+  * /accounts/login:
+  *   post:
+  *     description: Login to the application
+  *     tags:
+  *      - Account
+  *     produces:
+  *       - application/json
+  *     parameters:
+  *       - name: email
+  *         description: email to use for login.
+  *         in: formData
+  *         required: true
+  *         type: string
+  *       - name: password
+  *         description: User's password.
+  *         in: formData
+  *         required: true
+  *         type: string
+  *     responses:
+  *       200:
+  *         description: login
+  */
   public login(req: Request, res: Response, next: NextFunction) {
     if (req.method === 'OPTIONS') {
       var headers = {};
@@ -55,6 +106,15 @@ class AccountRouter {
   /**
  * GET one hero by id
  */
+  /**
+     * @swagger
+     * /:
+     *   get:
+     *     description: Returns the homepage
+     *     responses:
+     *       200:
+     *         description: hello world
+     */
   public signUp(req: Request, res: Response, next: NextFunction) {
     let query = parseInt(req.params.id);
     let email = req.body.email;
@@ -73,7 +133,7 @@ class AccountRouter {
 
     }).catch(function (err: any) {
 
-       console.error(err);
+      console.error(err);
       res.status(500)
         .send({
           message: 'error creating this user.'
