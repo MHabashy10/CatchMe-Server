@@ -8,6 +8,21 @@ dotenv.config();
 
 import HeroRouter from './routes/heroRouter';
 import AccountRouter from './routes/accountRouter'
+import swaggerUi = require('swagger-ui-express');
+import swaggerJSDoc = require('swagger-jsdoc');
+
+let options = {
+  swaggerDefinition: {
+    info: {
+      title: 'CatchMe', // Title (required)
+      version: '1.0.0', // Version (required)
+    },
+    basePath: '/api/v1', // Base path (optional)
+  },
+  apis: ['./dist/routes/*.js'], // Path to the API docs
+};
+
+
 
 import * as mongoose from 'mongoose';
 // Set mongoose.Promise to any Promise implementation
@@ -42,6 +57,9 @@ class App {
     this.express.use(logger('dev'));
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: false }));
+
+
+
 
     // Add headers
     // this.express.use(function (req, res, next) {
@@ -82,6 +100,9 @@ class App {
     this.express.use('/', router);
     this.express.use('/api/v1/heroes', HeroRouter);
     this.express.use('/api/v1/accounts', AccountRouter);
+    // Initialize swagger-jsdoc -> returns validated swagger spec in json format
+    let swaggerSpec = swaggerJSDoc(options);
+    this.express.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
 }
