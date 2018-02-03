@@ -16,7 +16,7 @@
 			"src/**/*.tsx"
 		],
 		"exclude": [
-		  "typings"
+			"typings"
 		],
 		"extension": [
 			".ts",
@@ -41,7 +41,9 @@
 		"dotenv": "^4.0.0",
 		"express": "^4.16.2",
 		"mongoose": "^4.13.3",
-		"morgan": "^1.9.0"
+		"morgan": "^1.9.0",
+		"swagger-jsdoc": "^1.9.7",
+		"swagger-ui-express": "^2.0.15"
 	},
 	"devDependencies": {
 		"@types/body-parser": "^1.16.8",
@@ -54,6 +56,7 @@
 		"@types/mongoose": "^4.7.27",
 		"@types/morgan": "^1.7.35",
 		"@types/node": "^6.0.92",
+		"@types/swagger-jsdoc": "0.0.2",
 		"chai": "^4.1.2",
 		"chai-http": "^3.0.0",
 		"gulp": "^3.9.1",
